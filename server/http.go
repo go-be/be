@@ -1,7 +1,6 @@
 package server
 
 import (
-	"fmt"
 	"github.com/go-be/be"
 	"net/http"
 )
@@ -15,7 +14,7 @@ func (server *Http) Start(port int) {
 
 	http.HandleFunc("/", func(rw http.ResponseWriter, r *http.Request) {
 
-		if server.routers != nil && len(server.routers) > 0 {
+		if server.routers != nil {
 
 			path := r.URL.Path
 			appName := ""
@@ -28,8 +27,6 @@ func (server *Http) Start(port int) {
 				}
 				i++
 			}
-
-			fmt.Println(appName)
 
 			if appName != "" {
 				if router, ok := server.routers[appName]; ok {
